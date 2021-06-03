@@ -20,6 +20,9 @@ router
           const newUser = await User.create({ name, surname, phone, email, password: hash, program, year, groupName, links });
           req.session.userId = newUser._id;
           req.session.userName = newUser.name;
+          req.session.userSurname = newUser.surname;
+          req.session.finishYear = newUser.year;
+          req.session.userLinks = newUser.links;
           return res.redirect("/");
         }
       }
@@ -43,7 +46,10 @@ router
         if (await bcrypt.compare(password, currUser.password)) {
           req.session.userId = currUser._id;
           req.session.userName = currUser.name;
-          return res.redirect("/");
+          req.session.userSurname = currUser.surname;
+          req.session.finishYear = currUser.year;
+          req.session.userLinks = currUser.links;
+          return res.redirect('/');
         }
       }
       return res.redirect("/user/signIn");
