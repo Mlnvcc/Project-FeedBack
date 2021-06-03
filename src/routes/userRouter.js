@@ -21,15 +21,14 @@ router
           req.session.userId = newUser._id;
           req.session.userName = newUser.name;
           req.session.userSurname = newUser.surname;
-          req.session.finishYear = newUser.year;
-          req.session.userLinks = newUser.links;
-          return res.redirect("/");
+          req.session.finishYear = newUser.year
+          req.session.userLinks = newUser.links
         }
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error.message)
     }
+
   });
 
 
@@ -51,8 +50,9 @@ router
           req.session.userLinks = currUser.links;
           return res.redirect('/');
         }
+      } else {
+        return res.redirect('/user/signIn')
       }
-      return res.redirect("/user/signIn");
     } catch (error) {
       console.error(error.message)
     }
