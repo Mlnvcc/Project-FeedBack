@@ -1,7 +1,10 @@
-const router = require('express').Router()
+const FeedbackModel = require('../models/feedbackModel')
 
-router.get('/', (req, res)=> {
-  res.render('index')
-})
+const router = require('express').Router();
 
-module.exports = router
+router.get('/', async (req, res) => {
+  const allFeedbacks = await FeedbackModel.find();
+  res.render('index', { allFeedbacks });
+});
+
+module.exports = router;
