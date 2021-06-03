@@ -35,6 +35,7 @@ function middleware(app) {
   app.use((req, res, next) => {
     if (req.session.userId) {
       res.locals.userId = req.session.userId;
+      res.locals.userName = req.session.userName
     }
     next();
   });

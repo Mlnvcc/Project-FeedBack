@@ -5,6 +5,7 @@ require('dotenv').config();
 
 // Импорт ручек
 const indexRouter = require('./src/routes/indexRouter');
+const userRouter = require('./src/routes/userRouter');
 const feedbackRouter = require('./src/routes/feedbackRouter');
 
 const app = express();
@@ -17,6 +18,7 @@ middleware(app);
 // Подключение ручек
 
 app.use('/', indexRouter);
+app.use('/user', userRouter);
 app.use('/review', feedbackRouter);
 
 app.listen(PORT, () => {
