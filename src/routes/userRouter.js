@@ -20,13 +20,15 @@ router
           const newUser = await User.create({ name, surname, phone, email, password: hash, program, year, groupName, links });
           req.session.userId = newUser._id;
           req.session.userName = newUser.name;
-          return res.redirect("/");
+          req.session.userSurname = newUser.surname;
+          req.session.finishYear = newUser.year
+          req.session.userLinks = newUser.links
         }
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error.message)
     }
+
   });
 
 
@@ -40,13 +42,21 @@ router
     try {
       if (email && password) {
         const currUser = await User.findOne({ email });
-        if (await bcrypt.compare(password, currUser.password)) {
-          req.session.userId = currUser._id;
-          req.session.userName = currUser.name;
-          return res.redirect("/");
+        if (currUser) {
+          if (await bcrypt.compare(password, currUser.password)) {
+            req.session.userId = currUser._id;
+            req.session.userName = currUser.name;
+            req.session.userSurname = currUser.surname;
+            req.session.finishYear = currUser.year;
+            req.session.userLinks = currUser.links;
+            return res.redirect("/");
+          }
+        } else {
+          return res.redirect("/user/signUp")
         }
+      } else {
+        return res.redirect('/user/signIn')
       }
-      return res.redirect("/user/signIn");
     } catch (error) {
       console.error(error.message)
     }
