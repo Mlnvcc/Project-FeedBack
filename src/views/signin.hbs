@@ -1,0 +1,27 @@
+<!--<form>-->
+<!--    <div class="mb-3">-->
+<!--&lt;!&ndash;        <label for="exampleInputEmail1" class="form-label">Email address</label>&ndash;&gt;-->
+<!--        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your email">-->
+<!--&lt;!&ndash;        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--&lt;!&ndash;        <label for="exampleInputPassword1" class="form-label">Password</label>&ndash;&gt;-->
+<!--        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Your password">-->
+<!--    </div>-->
+<!--    <div class="d-grid gap-2">-->
+<!--        <button class="btn btn-primary" type="button">Войти в систему</button>-->
+<!--    </div>-->
+<!--</form>-->
+
+<h2>Войдите в систему</h2>
+<form action="/signin" method="POST">
+    <div class="form-floating mb-3">
+        <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+        <button class="btn btn-primary" type="submit">Войти в систему</button>
+    </div>
+</form>
