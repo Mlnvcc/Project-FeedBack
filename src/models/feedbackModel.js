@@ -24,6 +24,14 @@ const feedbackSchema = Schema({
   date: {
     type: Date.toLocaleString('ru-RU'),
   },
+  generalIssues: {
+    type: String,
+    required: true,
+  },
+  technicalIssues: {
+    type: String,
+    required: true,
+  },
 });
 
 const FeedbackModel = model('Feedback', feedbackSchema);
