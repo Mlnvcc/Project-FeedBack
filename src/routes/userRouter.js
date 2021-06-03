@@ -10,23 +10,25 @@ router
   })
   .post(async (req, res) => {
     const { name, surname, phone, email, password, program, year, groupName, links } = req.body;
+   
+      try {
+        if (name && surname && phone && email && password && program && year && groupName){
+          if (await User.findOne({email})) {
+            return res.redirect("/user/signIn")
+          } else {
+            const hash = await bcrypt.hash(password, 10)
+            const newUser = await User.create({ name, surname, phone, email, password: hash, program, year, groupName, links});
+            req.session.userId = newUser._id;
+            req.session.userName = newUser.name;
+            req.session.finishYear = newUser.year
+            req.session.userLinks = newUser.links
 
-    try {
-      if (name && surname && phone && email && password && program && year && groupName) {
-        if (await User.findOne({ email })) {
-          return res.redirect("/user/signIn")
-        } else {
-          const hash = await bcrypt.hash(password, 10)
-          const newUser = await User.create({ name, surname, phone, email, password: hash, program, year, groupName, links });
-          req.session.userId = newUser._id;
-          req.session.userName = newUser.name;
-          return res.redirect("/");
+            return res.redirect("/");
+          }
         }
+        }catch (error) {
+        console.error(error.message)
       }
-    }
-    catch (error) {
-      console.error(error.message)
-    }
   });
 
 
@@ -36,23 +38,27 @@ router
     res.render("signin");
   })
   .post(async (req, res) => {
-    const { email, password } = req.body;
-    try {
+     const { email, password } = req.body;
+     try {
       if (email && password) {
         const currUser = await User.findOne({ email });
-        if (await bcrypt.compare(password, currUser.password)) {
-          req.session.userId = currUser._id;
-          req.session.userName = currUser.name;
-          return res.redirect("/");
+        if (currUser){
+          if (await bcrypt.compare(password, currUser.password)) {
+            req.session.userId = currUser._id;
+            req.session.userName = currUser.name;
+            return res.redirect("/");
+          }
+        }else{
+          return res.redirect("/user/signUp")
         }
-      }
-      return res.redirect("/user/signIn");
-    } catch (error) {
+        }else{
+          return res.redirect('/user/signIn')
+        }
+    }catch (error) {
       console.error(error.message)
-    }
-  })
+     }})
 
-
+    
 router.get("/logout", (req, res) => {
   req.session.destroy();
   res.clearCookie(req.app.get("cookieName"));

@@ -35,4 +35,13 @@ router.post('/', async (req, res) => {
   res.redirect('/');
 });
 
+router.get("/:id/edit", async (req, res) => {
+  if (req.session?.userName) {
+    let review = await FeedbackModel.findById(req.params.id);
+    res.render("editReview", { review });
+  }
+  return res.redirect("/user/signUp");
+});
+
+
 module.exports = router;

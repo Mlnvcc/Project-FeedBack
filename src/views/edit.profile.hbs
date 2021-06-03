@@ -1,11 +1,12 @@
-<form action="/edit.profile" method="POST">
+<form action="/review/edit">
     <div class="input-group">
+      <h1>Редактирование</h1>
         <span class="input-group-text">Имя и фамилия</span>
-        <input name="name" type="text" aria-label="First name" class="form-control">
-        <input name="surname" type="text" aria-label="Last name" class="form-control">
+        <input name="name" type="text" value="Update" aria-label="First name" class="form-control">
+        <input name="surname" type="text" value="Update" aria-label="Last name" class="form-control">
     </div>
-    <input name="date" type="text" class="form-control" placeholder="Дата рождения" >
-    <input name="date" class="form-control" type="text" placeholder="Город">
+    <input name="date" type="text" value="Update" class="form-control" placeholder="Дата рождения" >
+    <input name="date" class="form-control" type="text" value="Update" placeholder="Город">
 
 
     <select class="form-select" aria-label="Default select example">
@@ -31,6 +32,8 @@
         <option value="3">Онлайн Санкт-Петербург</option>
     </select>
 
-    <a href="">ссылка на соц.сети</a>
+    <div class="input-group mb-3">
+    <input name="links" type="text" value="Update" class="form-control" placeholder="ссылка на соц.cети" aria-label="Recipient's username" aria-describedby="button-addon2">
+</div>
 
 </form>
