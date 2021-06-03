@@ -21,6 +21,9 @@ const feedbackSchema = Schema({
       ref: 'Technology',
     },
   ],
+  date: {
+    type: Date.toLocaleString('ru-RU'),
+  },
 });
 
 const FeedbackModel = model('Feedback', feedbackSchema);
