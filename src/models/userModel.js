@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
     required: true,
   },
   year:  {
-    type: Number,
+    type: String,
     required: true,
   },
   groupName:  {
@@ -37,8 +37,6 @@ const userSchema = mongoose.Schema({
   },
   links:  {
     type: String,
-    required: true,
-    unique: true,
   },
 
 })
