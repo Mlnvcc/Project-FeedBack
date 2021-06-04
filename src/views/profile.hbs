@@ -1,4 +1,4 @@
-<div data-maindiv = '{{userId}}' class="card mb-3" >
+<div data-maindiv='{{userId}}' class="card mb-3">
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src="" class="card-img" alt="user foto">
@@ -9,16 +9,16 @@
         <p class="card-text"><small class="text-muted">Год выпуска: {{finishYear}}</small></p>
         <p class="card-text"><small class="text-muted">Соц. сети: {{userLinks}}</small></p>
 
-          <button type="button" class="btn btn-secondary">Edit</button>
+        <button type="button" class="btn btn-secondary">Редактировать</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="profileContent container py-2">
-  <a href="/review"><button type="button" class="addfeedback btn btn-success">Оставить отзыв</button></a>
+<a href="/review"><button type="button" class="addfeedback btn btn-success">Оставить отзыв</button></a>
+<div class="profileContent container py-3">
   {{#each userFeedBacks}}
-  <div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3" style="width: 540px;">
     <div class="row no-gutters">
       <div class="col-md-8">
         <div class="card-body">
@@ -30,8 +30,8 @@
           <p class="card-text">Общие вопросы: {{this.generalquestions}}</p>
           <p class="card-text">Комментарии: {{this.comments}}</p>
 
-          <button data-edit='{{this._id}}' type="button" class="btn btn-secondary">Edit</button>
-          <button data-delete='{{this._id}}' type="button" class="btn btn-primary">Delete</button>
+          <button data-edit='{{this._id}}' type="button" class="btn btn-secondary">Редактировать</button>
+          <button data-delete='{{this._id}}' type="button" class="btn btn-primary">Удалить</button>
         </div>
       </div>
     </div>
