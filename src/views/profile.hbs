@@ -14,21 +14,30 @@
   </div>
 </div>
 
+<div class="profileContent container py-2">
+{{#each userFeedBacks}}
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Название компании</h5>
-        <p class="card-text"><small class="text-muted">Дата собеса</small></p>
-        <p class="card-text"><small class="text-muted">Вакансия</small></p>
-        <p class="card-text"><small class="text-muted">Стек</small></p>
-        <p class="card-text">Тех вопросы</p>
-        <p class="card-text">Общие вопросы</p>
-        <p class="card-text">Комментарии</p>
+        <h5 class="card-title">Компания: {{this.company}}</h5>
+        <p class="card-text"><small class="text-muted">Дата собеседования: {{this.dateOfInterview}}</small></p>
+        <p class="card-text"><small class="text-muted">Вакансия: {{this.positionName.name}}</small></p>
+        <p class="card-text"><small class="text-muted">Стек: {{this.technologies.name}}</small></p>
+        <p class="card-text">Тех вопросы: {{this.techquestions}}</p>
+        <p class="card-text">Общие вопросы: {{this.generalquestions}}</p>
+        <p class="card-text">Комментарии: {{this.comments}}</p>
 
-  <button type="button" class="btn btn-secondary">Edit</button>
-  <button type="button" class="btn btn-primary">Delete</button>
+  <button data-edit='{{this._id}}'  type="button" class="btn btn-secondary">Edit</button>
+  <button data-delete='{{this._id}}' type="button" class="btn btn-primary">Delete</button>
       </div>
     </div>
   </div>
 </div>
+{{/each}}
+</div>
+
+
+
+
+<link rel="stylesheet" href="/css/profileStyle.css">
