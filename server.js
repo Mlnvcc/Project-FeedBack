@@ -21,7 +21,7 @@ middleware(app);
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/review', feedbackRouter);
-app.use('/user/profile', profileRouter)
+app.use('/user/profile', profileRouter);
 
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
