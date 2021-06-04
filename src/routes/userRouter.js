@@ -23,6 +23,7 @@ router
           req.session.userSurname = newUser.surname;
           req.session.finishYear = newUser.year
           req.session.userLinks = newUser.links
+          res.redirect('/')
         }
       }
     } catch (error) {

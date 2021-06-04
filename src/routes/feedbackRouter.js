@@ -5,7 +5,7 @@ const PositionModel = require('../models/vacancyModel');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  req.session.userId ? res.sendStatus(200) : res.sendStatus(401);
+  req.session.userId ? res.render('review') : res.redirect('user/signUp');
 });
 
 router.post('/', async (req, res) => {
