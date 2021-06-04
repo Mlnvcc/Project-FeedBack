@@ -14,10 +14,10 @@ const feedbackSchema = Schema({
     ref: 'Vacancy',
   },
   technologies:
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Technology',
-    },
+  {
+    type: Schema.Types.ObjectId,
+    ref: 'Technology',
+  },
   techquestions: String,
   generalquestions: String,
 });

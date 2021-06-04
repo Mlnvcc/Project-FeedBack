@@ -10,9 +10,10 @@
         <div class="mb-3">
             <p>Название компании: {{this.company}}</p>
             <p>Дата собеседования: {{this.dateOfInterview}}</p>
-            <p>Автор отзыва: {{this.author}}</p>
+            <p>Автор отзыва: {{this.author.name}} {{this.author.surname}}</p>
             <p>Расположение компании: {{this.locationOfCompany}}</p>
-            <p>Позиция на которую собеседовались: {{this.positionName}}</p>
+            <p>Позиция на которую собеседовались: {{this.positionName.name}}</p>
+            <p>Стек технологий на которые собеседовались: {{this.technologies.name}}</p>
 
 
         </div>
