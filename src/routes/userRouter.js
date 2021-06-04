@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const User = require('../models/userModel')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { protectProfile } = require('../middleware/middleware');
+const FeedbackModel = require('../models/feedbackModel');
 
 
 router
@@ -70,7 +72,11 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-
+router.route('/profile')
+  .get(protectProfile, async (req, res) => {
+    const userFeedBacks = await FeedbackModel.find({ author: req.session.userId }).populate('positionName').populate('technologies');
+    res.render('profile', { userFeedBacks });
+  });
 
 
 

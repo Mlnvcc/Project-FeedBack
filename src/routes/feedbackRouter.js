@@ -1,3 +1,4 @@
+const { protectProfile } = require('../middleware/middleware');
 const FeedbackModel = require('../models/feedbackModel');
 const TechnologyModel = require('../models/technologyModel');
 const PositionModel = require('../models/vacancyModel');
@@ -34,6 +35,53 @@ router.post('/', async (req, res) => {
   });
   res.redirect('/');
 });
+
+router.route('/:id/edit')
+  .get(protectProfile, async (req, res) => {
+    try {
+      const selectedFeedBack = await FeedbackModel.findById(req.params.id).populate('positionName').populate('technologies');
+      res.render('editReview', { selectedFeedBack });
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+  .patch(async (req, res) => {
+    const {
+      comments,
+      company,
+      dateOfInterview,
+      generalquestions,
+      locationOfCompany,
+      positionName,
+      technologies,
+      techquestions,
+    } = req.body;
+    try {
+      const selectedFeedBack = await FeedbackModel.findByIdAndUpdate(req.params.id,
+        {
+          company,
+          dateOfInterview,
+          comments,
+          locationOfCompany,
+          techquestions,
+          generalquestions,
+        }, { new: true });
+
+      await PositionModel.findByIdAndUpdate(selectedFeedBack.positionName, { name: positionName }, { new: true });
+      await TechnologyModel.findByIdAndUpdate(selectedFeedBack.technologies, { name: technologies }, { new: true });
+      res.sendStatus(200);
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+  .delete (protectProfile, async (req, res) => {
+    try {
+      await FeedbackModel.findByIdAndDelete(req.params.id);
+      res.sendStatus(200);
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
 
 router.get("/:id/edit", async (req, res) => {
   if (req.session?.userName) {
