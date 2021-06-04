@@ -11,29 +11,58 @@ router
     res.render("signup");
   })
   .post(async (req, res) => {
-    const { name, surname, phone, email, password, program, year, groupName, links } = req.body;
+    const {
+      name,
+      surname,
+      phone,
+      email,
+      password,
+      program,
+      year,
+      groupName,
+      links,
+    } = req.body;
 
     try {
-      if (name && surname && phone && email && password && program && year && groupName) {
+      if (
+        name &&
+        surname &&
+        phone &&
+        email &&
+        password &&
+        program &&
+        year &&
+        groupName
+      ) {
         if (await User.findOne({ email })) {
-          return res.redirect("/user/signIn")
+          return res.redirect("/user/signIn");
         } else {
-          const hash = await bcrypt.hash(password, 10)
-          const newUser = await User.create({ name, surname, phone, email, password: hash, program, year, groupName, links });
+          const hash = await bcrypt.hash(password, 10);
+          const newUser = await User.create({
+            name,
+            surname,
+            phone,
+            email,
+            password: hash,
+            program,
+            year,
+            groupName,
+            links,
+          });
           req.session.userId = newUser._id;
           req.session.userName = newUser.name;
           req.session.userSurname = newUser.surname;
-          req.session.finishYear = newUser.year
-          req.session.userLinks = newUser.links
+          req.session.finishYear = newUser.year;
+          req.session.userLinks = newUser.links;
+          req.session.userPhone = newUser.phone
+          req.session.userEmail = newUser.email
           res.redirect('/')
         }
       }
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
-
   });
-
 
 router
   .route("/signIn")
@@ -52,19 +81,20 @@ router
             req.session.userSurname = currUser.surname;
             req.session.finishYear = currUser.year;
             req.session.userLinks = currUser.links;
+            req.session.userPhone = currUser.phone;
+            req.session.userEmail = currUser.email;
             return res.redirect("/");
           }
         } else {
-          return res.redirect("/user/signUp")
+          return res.redirect("/user/signUp");
         }
       } else {
-        return res.redirect('/user/signIn')
+        return res.redirect("/user/signIn");
       }
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
-  })
-
+  });
 
 router.get("/logout", (req, res) => {
   req.session.destroy();

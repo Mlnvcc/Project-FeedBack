@@ -39,6 +39,8 @@ function middleware(app) {
       res.locals.finishYear = req.session.finishYear;
       res.locals.userLinks = req.session.userLinks;
       res.locals.userSurname = req.session.userSurname;
+      res.locals.userPhone = req.session.userPhone;
+      res.locals.userEmail = req.session.userEmail;
     }
     next();
   });
