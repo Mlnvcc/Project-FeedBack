@@ -3,7 +3,6 @@ const { dbConnect } = require('./src/db/dbConnect');
 const { middleware } = require('./src/middleware/middleware');
 require('dotenv').config();
 
-// Импорт ручек
 const indexRouter = require('./src/routes/indexRouter');
 const userRouter = require('./src/routes/userRouter');
 const feedbackRouter = require('./src/routes/feedbackRouter');
@@ -15,8 +14,6 @@ const PORT = process.env.PORT || 3000;
 dbConnect();
 
 middleware(app);
-
-// Подключение ручек
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
