@@ -35,6 +35,12 @@ function middleware(app) {
   app.use((req, res, next) => {
     if (req.session.userId) {
       res.locals.userId = req.session.userId;
+      res.locals.userName = req.session.userName;
+      res.locals.finishYear = req.session.finishYear;
+      res.locals.userLinks = req.session.userLinks;
+      res.locals.userSurname = req.session.userSurname;
+      res.locals.userPhone = req.session.userPhone;
+      res.locals.userEmail = req.session.userEmail;
     }
     next();
   });
